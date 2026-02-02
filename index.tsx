@@ -4,6 +4,9 @@
  * Rebuilt for perfect navigation and 100% performance.
  */
 
+// Added export to convert this file into a module and prevent global variable redeclaration errors
+export {};
+
 // --- Central Data Registry ---
 const PRODUCTS = [
     { id: 'gold-loan', name: 'Gold Loan', category: 'loan', overview: 'Unlock immediate cash against your gold jewelry with maximum valuation and lowest interest rates.', features: ['Instant Disbursal', 'Safety Vaults', 'Part-release Facility', 'Minimal Paperwork'], eligibility: ['Age 18-70', 'Own Gold Ornaments'], documents: ['Aadhar Card', 'PAN Card', 'Photograph'], interestRate: 'Starts from 9.9% p.a.' },
