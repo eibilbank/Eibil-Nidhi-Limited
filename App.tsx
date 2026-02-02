@@ -32,9 +32,10 @@ interface AboutProps {
 /**
  * About Component - Fixed the 'Property settings does not exist on type IntrinsicAttributes' error
  * by using explicit prop destructuring with a typed interface instead of React.FC.
+ * This approach is more robust in ensuring TypeScript correctly identifies the allowed props
+ * for the component in JSX.
  */
-// Fix: Explicitly type the component using React.FC<AboutProps> to ensure TypeScript recognizes the 'settings' prop
-const About: React.FC<AboutProps> = ({ settings }) => (
+const About = ({ settings }: AboutProps) => (
   <div className="pb-20">
     <section className="bg-brand-lightBlue py-20 px-4">
       <div className="max-w-7xl mx-auto text-center">
