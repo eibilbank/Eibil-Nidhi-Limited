@@ -14,7 +14,8 @@ import { PRODUCTS as INITIAL_PRODUCTS, BRANCHES as INITIAL_BRANCHES } from './co
 import { ProductInfo } from './types';
 
 /**
- * About component defined above App to ensure proper typing and hoisting in TS
+ * Fix: Properly typed the About component using React.FC to ensure correct prop validation
+ * and resolve the 'Property settings does not exist on type IntrinsicAttributes' error.
  */
 const About: React.FC<{ settings: any }> = ({ settings }) => (
   <div className="pb-20">

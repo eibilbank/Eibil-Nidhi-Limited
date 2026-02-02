@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EIBIL Nidhi Limited - Premium Financial Services including Gold Loans, Property Loans, and high-yield Deposit Schemes. Licensed by MCA, Govt of India.">
+    <meta name="keywords" content="Nidhi Company, Gold Loan, Property Loan, Fixed Deposit, Savings, EIBIL Nidhi">
     <title>EIBIL NIDHI LIMITED | Modern Financial Trust</title>
+    
+    <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -12,53 +16,213 @@
           extend: {
             colors: {
               brand: {
-                blue: '#0ea5e9', // sky-500
-                pink: '#ec4899', // pink-500
-                lightBlue: '#f0f9ff', // sky-50
-                lightPink: '#fdf2f8', // pink-50
+                blue: '#0ea5e9',
+                pink: '#ec4899',
+                lightBlue: '#f0f9ff',
+                lightPink: '#fdf2f8',
               }
-            },
-            backgroundImage: {
-              'gradient-brand': 'linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%)',
             }
           }
         }
       }
     </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        :root {
+            --brand-blue: #0ea5e9;
+            --brand-pink: #ec4899;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
         }
+        
         .text-gradient {
-            background: linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%);
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-pink) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
         .btn-brand {
-            background: linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%);
+            background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-pink) 100%);
             transition: all 0.3s ease;
+            color: white;
         }
+        
         .btn-brand:hover {
             filter: brightness(1.1);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px -5px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Fade-in animation for page transitions */
+        #app-content {
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--brand-blue); border-radius: 10px; }
+        
+        /* Dropdown transition */
+        .product-dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .group:hover .product-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
     </style>
 <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@^19.2.4",
-    "react/": "https://esm.sh/react@^19.2.4/",
     "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "react/": "https://esm.sh/react@^19.2.4/"
   }
 }
 </script>
 </head>
 <body class="bg-[#fafafa] text-slate-900">
-    <div id="root"></div>
+
+    <!-- Header / Navigation -->
+    <nav class="glass-nav sticky top-0 z-50 border-b border-brand-blue/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#home" class="flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-gradient-brand rounded-xl flex items-center justify-center text-white font-black italic shadow-lg group-hover:scale-110 transition bg-[linear-gradient(135deg,#0ea5e9_0%,#ec4899_100%)]">E</div>
+                        <div class="flex flex-col">
+                            <span id="nav-company-name" class="text-xl font-extrabold tracking-tight text-slate-800 leading-none">EIBIL <span class="text-brand-pink">NIDHI</span></span>
+                            <span id="nav-tagline" class="text-[10px] uppercase tracking-[0.2em] text-brand-blue font-bold">Limited</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition">Home</a>
+                    <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition">About</a>
+                    
+                    <div class="relative group h-full flex items-center">
+                        <button class="flex items-center text-sm font-semibold text-slate-600 hover:text-brand-pink transition h-full">
+                            Products
+                            <svg class="ml-1.5 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <!-- Mega Menu Dropdown -->
+                        <div class="product-dropdown absolute top-20 left-1/2 -translate-x-1/2 w-[600px] bg-white border border-slate-100 shadow-2xl rounded-2xl p-8 grid grid-cols-2 gap-10">
+                            <div>
+                                <h4 class="text-[11px] font-black uppercase text-brand-blue tracking-widest mb-5">Loan Solutions</h4>
+                                <div id="nav-loans-list" class="space-y-2">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-[11px] font-black uppercase text-brand-pink tracking-widest mb-5">Saving Schemes</h4>
+                                <div id="nav-deposits-list" class="space-y-2">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#investors" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition">Investors</a>
+                    <a href="#contact" class="text-sm font-semibold text-slate-600 hover:text-brand-blue transition">Contact</a>
+                    <a href="#apply" class="btn-brand px-7 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-brand-pink/20">Apply Online</a>
+                    <a id="admin-badge" href="#admin" class="hidden p-2 bg-slate-900 rounded-lg text-white font-bold text-xs uppercase tracking-tighter">Admin</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-800 p-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-50 p-6 space-y-4 shadow-xl">
+            <a href="#home" class="block text-lg font-bold text-slate-800">Home</a>
+            <a href="#about" class="block text-lg font-bold text-slate-800">About Us</a>
+            <a href="#investors" class="block text-lg font-bold text-slate-800">Investors</a>
+            <a href="#contact" class="block text-lg font-bold text-slate-800">Contact</a>
+            <a href="#apply" class="block text-center btn-brand py-4 rounded-xl font-bold">Apply Online</a>
+        </div>
+    </nav>
+
+    <!-- Main Dynamic Content Area -->
+    <main id="app-content"></main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 pt-32 pb-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-pink/5 rounded-full blur-[120px] -mr-48 -mt-48"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 relative z-10">
+            <div class="space-y-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-[linear-gradient(135deg,#0ea5e9_0%,#ec4899_100%)] rounded-xl flex items-center justify-center text-white font-black italic shadow-lg">E</div>
+                    <div class="flex flex-col text-white">
+                        <span id="footer-company-name" class="text-xl font-extrabold tracking-tight">EIBIL NIDHI</span>
+                        <span id="footer-tagline" class="text-[10px] uppercase tracking-[0.2em] text-brand-blue font-bold">LIMITED</span>
+                    </div>
+                </div>
+                <p class="text-sm leading-relaxed font-medium">
+                    India's most innovative Nidhi company, bridging the gap between traditional savings and modern financial convenience.
+                </p>
+            </div>
+
+            <div>
+                <h3 class="text-white font-black uppercase text-xs tracking-widest mb-10">Solutions</h3>
+                <div id="footer-products-list" class="grid grid-cols-1 gap-4 text-sm font-semibold">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-white font-black uppercase text-xs tracking-widest mb-10">Corporate</h3>
+                <ul class="space-y-4 text-sm font-semibold">
+                    <li><a href="#about" class="hover:text-white transition">About Our Legacy</a></li>
+                    <li><a href="#investors" class="hover:text-white transition">Investor Relations</a></li>
+                    <li><a href="#contact" class="hover:text-white transition">Support Hub</a></li>
+                    <li><a href="#admin" class="hover:text-white transition">Employee Login</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-white font-black uppercase text-xs tracking-widest mb-10">Get In Touch</h3>
+                <div class="space-y-6 text-sm font-medium">
+                    <div class="flex gap-4">
+                        <span class="text-brand-pink">📍</span>
+                        <p>Finance Towers, BKC, Mumbai</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-brand-blue">📞</span>
+                        <p id="footer-phone">1800-123-4567</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 mt-32 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+            <p>&copy; 2024 EIBIL NIDHI LTD. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-10">
+                <a href="#privacy" class="hover:text-brand-blue transition">Privacy Policy</a>
+                <a href="#terms" class="hover:text-brand-pink transition">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- No separate app.js script tag here, using index.tsx as entry -->
 </body>
 </html>
