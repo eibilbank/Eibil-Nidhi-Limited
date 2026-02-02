@@ -13,11 +13,28 @@ import { Footer } from './components/Footer';
 import { PRODUCTS as INITIAL_PRODUCTS, BRANCHES as INITIAL_BRANCHES } from './constants';
 import { ProductInfo } from './types';
 
+// Define explicit interface for site settings used in the About component
+interface AboutSettings {
+  companyName: string;
+  companySuffix: string;
+  tagline: string;
+  heroTitle: string;
+  heroSub: string;
+  email: string;
+  phone: string;
+}
+
+// Define props interface for About component to ensure correct JSX attribute validation
+interface AboutProps {
+  settings: AboutSettings;
+}
+
 /**
- * Fix: Properly typed the About component using React.FC to ensure correct prop validation
- * and resolve the 'Property settings does not exist on type IntrinsicAttributes' error.
+ * About Component - Fixed the 'Property settings does not exist on type IntrinsicAttributes' error
+ * by using explicit prop destructuring with a typed interface instead of React.FC.
  */
-const About: React.FC<{ settings: any }> = ({ settings }) => (
+// Fix: Explicitly type the component using React.FC<AboutProps> to ensure TypeScript recognizes the 'settings' prop
+const About: React.FC<AboutProps> = ({ settings }) => (
   <div className="pb-20">
     <section className="bg-brand-lightBlue py-20 px-4">
       <div className="max-w-7xl mx-auto text-center">
@@ -92,7 +109,7 @@ function App() {
     return saved ? JSON.parse(saved) : INITIAL_BRANCHES;
   });
 
-  const [siteSettings, setSiteSettings] = useState(() => {
+  const [siteSettings, setSiteSettings] = useState<AboutSettings>(() => {
     const saved = localStorage.getItem('eibil_settings');
     return saved ? JSON.parse(saved) : {
       companyName: 'EIBIL NIDHI',
