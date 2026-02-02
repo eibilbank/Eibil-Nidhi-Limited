@@ -1,0 +1,7 @@
+{
+  "name": "EIBIL Nidhi Limited - Premium Financial Services",
+  "description": "A comprehensive financial services portal for EIBIL Nidhi Limited, featuring loan applications, investor relations, and product management.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
