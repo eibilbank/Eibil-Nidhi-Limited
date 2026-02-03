@@ -4,37 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EIBIL NIDHI LIMITED - India's most trusted Nidhi company offering Gold Loans, Property Loans, and high-yield Saving Schemes.">
-    <meta name="keywords" content="Nidhi Company, Gold Loan, Property Loan, Fixed Deposit, Saving Deposit, EIBIL Nidhi">
+    <meta name="description" content="EIBIL NIDHI LIMITED - India's premier Nidhi company offering trusted Gold Loans, Property Loans, and High-Yield Savings Schemes.">
     <title>EIBIL NIDHI LIMITED | Modern Financial Trust</title>
     
-    <!-- Professional Styling -->
+    <!-- Professional Typography & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: { 
-              brand: { 
-                blue: '#0ea5e9', 
-                pink: '#ec4899', 
-                slate: '#0f172a',
-                light: '#f8fafc'
-              } 
+              brand: { blue: '#0ea5e9', pink: '#ec4899', dark: '#0f172a', bg: '#f8fafc' } 
             }
           }
         }
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         .text-gradient { background: linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .btn-brand { background: linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%); color: white; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .btn-brand:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.4); }
-        .glass-nav { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(14, 165, 233, 0.1); }
-        .dropdown-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; }
-        .group:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-brand { background: linear-gradient(135deg, #0ea5e9 0%, #ec4899 100%); color: white; transition: 0.3s; }
+        .btn-brand:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(236, 72, 153, 0.4); }
+        .glass-nav { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(14, 165, 233, 0.1); }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #f1f5f9; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-radius: 1rem; width: 250px; padding: 1rem; z-index: 100; }
+        .group:hover .dropdown-menu { display: block; }
+        [data-view] { display: none; }
+        [data-view].active { display: block; }
     </style>
 <script type="importmap">
 {
@@ -46,98 +44,92 @@
 }
 </script>
 </head>
-<body class="bg-[#fafafa] text-slate-800">
-    <!-- Navbar -->
+<body class="bg-brand-bg text-slate-800">
+
+    <!-- Header / Navigation -->
     <nav class="glass-nav sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-11 h-11 btn-brand rounded-2xl flex items-center justify-center font-black italic shadow-lg">E</div>
+            <a href="#home" class="flex items-center gap-3">
+                <div class="w-10 h-10 btn-brand rounded-xl flex items-center justify-center font-black italic shadow-lg">E</div>
                 <div class="flex flex-col">
-                    <span id="nav-company-name" class="font-extrabold text-xl leading-none tracking-tight">EIBIL <span class="text-brand-pink">NIDHI</span></span>
-                    <span id="nav-tagline" class="text-[9px] uppercase font-bold text-brand-blue tracking-[0.2em]">Limited</span>
+                    <span class="font-extrabold text-xl leading-none text-slate-900">EIBIL <span class="text-brand-pink">NIDHI</span></span>
+                    <span class="text-[9px] uppercase font-bold text-brand-blue tracking-widest">Limited</span>
                 </div>
             </a>
             
-            <div class="hidden lg:flex items-center gap-8 font-bold text-[13px] text-slate-600">
+            <div class="hidden lg:flex items-center gap-8 font-bold text-sm text-slate-600">
                 <a href="#home" class="hover:text-brand-blue transition">Home</a>
                 <a href="#about" class="hover:text-brand-blue transition">About Us</a>
                 
                 <div class="relative group h-20 flex items-center cursor-pointer">
-                    <span class="hover:text-brand-blue transition flex items-center gap-1">Products <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg></span>
-                    <div class="dropdown-menu absolute top-20 left-1/2 -translate-x-1/2 w-[580px] bg-white border border-slate-100 shadow-2xl rounded-[2rem] p-8 grid grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-[10px] font-black uppercase text-brand-blue tracking-widest mb-4">Loan Solutions</h4>
-                            <div id="nav-loans-list" class="space-y-1"></div>
-                        </div>
-                        <div>
-                            <h4 class="text-[10px] font-black uppercase text-brand-pink tracking-widest mb-4">Saving Schemes</h4>
-                            <div id="nav-deposits-list" class="space-y-1"></div>
-                        </div>
+                    <span class="hover:text-brand-blue transition flex items-center gap-1">Products <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+                    <div class="dropdown-menu">
+                        <a href="#product/gold-loan" class="block p-3 hover:bg-slate-50 rounded-lg text-xs">Gold Loan</a>
+                        <a href="#product/property-loan" class="block p-3 hover:bg-slate-50 rounded-lg text-xs">Property Loan</a>
+                        <a href="#product/deposits" class="block p-3 hover:bg-slate-50 rounded-lg text-xs">Saving Deposits</a>
+                        <a href="#product/recurring" class="block p-3 hover:bg-slate-50 rounded-lg text-xs">Recurring Deposits</a>
                     </div>
                 </div>
 
-                <a href="#investors" class="hover:text-brand-blue transition">Investor Relations</a>
+                <a href="#investors" class="hover:text-brand-blue transition">Investors</a>
                 <a href="#branches" class="hover:text-brand-blue transition">Branches</a>
                 <a href="#contact" class="hover:text-brand-blue transition">Contact</a>
-                
-                <a href="#apply" class="btn-brand px-8 py-3 rounded-xl font-bold text-sm shadow-xl">Apply Online</a>
-                <a id="admin-badge" href="#admin" class="hidden bg-slate-100 text-slate-900 px-3 py-1.5 rounded-lg text-xs">Admin Panel</a>
+                <a href="#apply" class="btn-brand px-6 py-2.5 rounded-xl text-xs shadow-lg">Apply Online</a>
             </div>
 
-            <!-- Mobile Menu Toggle -->
-            <button class="lg:hidden p-2 text-slate-600" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <!-- Mobile Menu Btn -->
+            <button class="lg:hidden text-slate-900" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
             </button>
         </div>
-
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t p-6 space-y-4 shadow-xl">
-            <a href="#home" class="block font-bold" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Home</a>
-            <a href="#about" class="block font-bold" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About Us</a>
-            <a href="#investors" class="block font-bold" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Investors</a>
-            <a href="#apply" class="block btn-brand text-center py-3 rounded-xl font-bold" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Apply Now</a>
+        
+        <!-- Mobile Nav -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white border-t p-6 space-y-4 shadow-xl">
+            <a href="#home" class="block font-bold" onclick="this.parentElement.classList.add('hidden')">Home</a>
+            <a href="#about" class="block font-bold" onclick="this.parentElement.classList.add('hidden')">About</a>
+            <a href="#apply" class="block btn-brand p-4 rounded-xl text-center font-bold" onclick="this.parentElement.classList.add('hidden')">Apply Now</a>
         </div>
     </nav>
 
-    <!-- Content Target -->
-    <div id="app-root" class="min-h-[70vh]"></div>
+    <!-- Main Content Injection Point -->
+    <main id="app-root"></main>
 
     <!-- Footer -->
-    <footer class="bg-brand-slate text-slate-400 py-24 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-16">
-            <div class="space-y-8">
+    <footer class="bg-brand-dark text-slate-400 py-20 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-4 gap-12">
+            <div class="space-y-6">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 btn-brand rounded-xl flex items-center justify-center font-black italic">E</div>
-                    <span class="text-white font-black text-xl">EIBIL NIDHI LIMITED</span>
+                    <div class="w-8 h-8 btn-brand rounded-lg flex items-center justify-center font-black italic">E</div>
+                    <span class="text-white font-bold">EIBIL NIDHI LIMITED</span>
                 </div>
-                <p class="text-sm">Trusted financial partner since 2018. Fully compliant with Nidhi Rules, 2014.</p>
+                <p class="text-xs leading-relaxed">India's most innovative Nidhi company, bridging the gap between traditional savings and modern financial convenience.</p>
             </div>
             <div>
-                <h4 class="text-white font-black uppercase text-xs tracking-widest mb-8">Navigation</h4>
-                <ul class="space-y-4 text-sm font-semibold">
-                    <li><a href="#about" class="hover:text-brand-blue transition">Our Legacy</a></li>
-                    <li><a href="#investors" class="hover:text-brand-blue transition">Investor Center</a></li>
-                    <li><a href="#branches" class="hover:text-brand-blue transition">Branch Locator</a></li>
+                <h4 class="text-white font-bold text-xs uppercase mb-6">Quick Links</h4>
+                <ul class="text-xs space-y-3 font-semibold">
+                    <li><a href="#about" class="hover:text-brand-blue">Our Legacy</a></li>
+                    <li><a href="#investors" class="hover:text-brand-blue">Investor Center</a></li>
+                    <li><a href="#branches" class="hover:text-brand-blue">Branch Locator</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-black uppercase text-xs tracking-widest mb-8">Corporate</h4>
-                <ul class="space-y-4 text-sm font-semibold">
-                    <li><a href="#terms" class="hover:text-brand-blue transition">Terms of Service</a></li>
-                    <li><a href="#privacy" class="hover:text-brand-blue transition">Privacy Policy</a></li>
+                <h4 class="text-white font-bold text-xs uppercase mb-6">Support</h4>
+                <ul class="text-xs space-y-3 font-semibold">
+                    <li><a href="#contact" class="hover:text-brand-blue">Contact Us</a></li>
+                    <li><a href="#apply" class="hover:text-brand-blue">Online Application</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-black uppercase text-xs tracking-widest mb-8">Support</h4>
-                <p class="text-sm mb-4">Toll-Free Helpline</p>
-                <p class="text-2xl font-black text-white">1800-123-4567</p>
+                <h4 class="text-white font-bold text-xs uppercase mb-6">Legal</h4>
+                <p class="text-[10px] leading-relaxed">Regulated by MCA, Govt. of India under the Nidhi Rules, 2014. Member of leading financial associations.</p>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-4 mt-24 pt-8 border-t border-white/5 text-[10px] font-bold text-center">
-            &copy; 2024 EIBIL NIDHI LIMITED. REGULATED BY MINISTRY OF CORPORATE AFFAIRS.
+        <div class="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-slate-800 text-center text-[10px] font-bold">
+            &copy; 2024 EIBIL NIDHI LIMITED. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
-    <!-- Main Engine -->
+    <!-- App Engine -->
     <script src="main.js"></script>
 </body>
 </html>

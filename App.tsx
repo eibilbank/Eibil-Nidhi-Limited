@@ -31,9 +31,10 @@ interface AboutProps {
 
 /**
  * About Component - Fixed the 'Property settings does not exist on type IntrinsicAttributes' error
- * by using explicit React.FC typing to properly define the expected props for the JSX compiler.
+ * by using a standard functional component definition instead of React.FC.
  */
-const About: React.FC<AboutProps> = ({ settings }) => (
+// Added fix: Changed from React.FC<AboutProps> to standard function to resolve IntrinsicAttributes error
+const About = ({ settings }: AboutProps) => (
   <div className="pb-20">
     <section className="bg-brand-lightBlue py-20 px-4">
       <div className="max-w-7xl mx-auto text-center">

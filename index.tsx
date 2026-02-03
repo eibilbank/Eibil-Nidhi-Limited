@@ -40,6 +40,32 @@ let state = {
     applications: JSON.parse(localStorage.getItem('eibil_applications') || '[]')
 };
 
+// --- EMI Calculation Core ---
+(window as any).calculateEMI = () => {
+    const pInput = document.getElementById('calc-p-input') as HTMLInputElement;
+    const rInput = document.getElementById('calc-r-input') as HTMLInputElement;
+    const nInput = document.getElementById('calc-n-input') as HTMLInputElement;
+    
+    const pDisplay = document.getElementById('calc-p-display');
+    const rDisplay = document.getElementById('calc-r-display');
+    const nDisplay = document.getElementById('calc-n-display');
+    const emiResult = document.getElementById('calc-emi-result');
+
+    if (!pInput || !rInput || !nInput || !emiResult) return;
+
+    const P = parseFloat(pInput.value);
+    const R = parseFloat(rInput.value) / 12 / 100;
+    const N = parseInt(nInput.value);
+
+    // Standard EMI Formula
+    const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+
+    if (pDisplay) pDisplay.innerText = '₹ ' + P.toLocaleString('en-IN');
+    if (rDisplay) rDisplay.innerText = rInput.value + '% p.a.';
+    if (nDisplay) nDisplay.innerText = N + ' Months';
+    emiResult.innerText = '₹ ' + (emi ? Math.round(emi).toLocaleString('en-IN') : '0');
+};
+
 // --- View Templates ---
 const views = {
     home: () => `
@@ -61,27 +87,41 @@ const views = {
                 </div>
             </div>
             <div class="lg:w-2/5 w-full bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-50 relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition duration-1000"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 rounded-full -mr-16 -mt-16"></div>
                 <h3 class="text-2xl font-black mb-8 flex items-center gap-3">EMI Calculator <span class="text-xs bg-slate-100 px-2 py-1 rounded">MEMBER RATES</span></h3>
-                <div class="space-y-8">
+                <div class="space-y-6">
                     <div>
-                        <div class="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4">
-                            <span>Principal</span>
-                            <span class="text-brand-blue">₹ 5,00,000</span>
+                        <div class="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-widest mb-3">
+                            <span>Loan Amount</span>
+                            <span id="calc-p-display" class="text-brand-blue font-black">₹ 5,00,000</span>
                         </div>
-                        <input type="range" class="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-brand-blue" min="10000" max="2500000" step="10000">
+                        <input id="calc-p-input" type="range" class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-brand-blue" min="10000" max="2500000" step="10000" value="500000" oninput="calculateEMI()">
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Interest</p>
-                            <p class="text-xl font-black text-slate-800">9.9%*</p>
+
+                    <div>
+                        <div class="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-widest mb-3">
+                            <span>Interest Rate</span>
+                            <span id="calc-r-display" class="text-brand-pink font-black">9.9% p.a.</span>
                         </div>
-                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">EMI / Month</p>
-                            <p class="text-xl font-black text-slate-800">₹ 8,450</p>
+                        <input id="calc-r-input" type="range" class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-brand-pink" min="5" max="24" step="0.1" value="9.9" oninput="calculateEMI()">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-[11px] font-black text-slate-400 uppercase tracking-widest mb-3">
+                            <span>Tenure (Months)</span>
+                            <span id="calc-n-display" class="text-brand-blue font-black">60 Months</span>
+                        </div>
+                        <input id="calc-n-input" type="range" class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-brand-blue" min="12" max="120" step="12" value="60" oninput="calculateEMI()">
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-50">
+                        <div class="p-6 bg-slate-900 rounded-2xl text-center shadow-xl">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Estimated Monthly EMI</p>
+                            <p id="calc-emi-result" class="text-4xl font-black text-white">₹ 10,598</p>
                         </div>
                     </div>
-                    <a href="#apply" class="block w-full text-center py-5 bg-slate-900 text-white rounded-2xl font-black hover:bg-brand-blue transition shadow-lg">Get This Loan Now</a>
+                    
+                    <a href="#apply" class="block w-full text-center py-5 bg-brand-blue text-white rounded-2xl font-black hover:bg-brand-pink transition shadow-lg">Get This Loan Now</a>
                 </div>
             </div>
         </section>
@@ -124,7 +164,7 @@ const views = {
             <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&q=80&w=800" class="rounded-[3rem] shadow-2xl" />
         </section>
     `,
-    product: (id) => {
+    product: (id: string) => {
         const p = PRODUCTS.find(x => x.id === id);
         if (!p) return `<div class="py-40 text-center"><h1 class="text-4xl font-black">Product Not Found</h1><a href="#home" class="text-brand-blue font-bold">Back to Home</a></div>`;
         return `
@@ -337,7 +377,7 @@ const render = () => {
         const productId = hash.split('/')[1];
         root.innerHTML = views.product(productId);
     } else {
-        root.innerHTML = (views[hash] || views.home)();
+        root.innerHTML = ((views as any)[hash] || views.home)();
     }
 
     // Refresh UI Components
@@ -345,6 +385,11 @@ const render = () => {
     
     // Smooth scroll to top on every navigation
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Initial calculation if on home
+    if (hash === 'home' || hash === '') {
+        (window as any).calculateEMI();
+    }
 };
 
 const updateBranding = () => {
@@ -381,31 +426,33 @@ const updateBranding = () => {
 };
 
 // --- Handlers & API Simulators ---
-window['setInvestorCat'] = (c) => { 
+(window as any)['setInvestorCat'] = (c: string) => { 
     state.activeInvestorCat = c; 
     render(); 
 };
 
-window['handleApply'] = (e) => {
+(window as any)['handleApply'] = (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const app = Object.fromEntries(formData);
-    state.applications.push(app);
+    state.applications.push(app as any);
     localStorage.setItem('eibil_applications', JSON.stringify(state.applications));
     
     // UI Success Feedback
     const root = document.getElementById('app-root');
-    root.innerHTML = `
-        <div class="py-40 text-center px-4 animate-in zoom-in duration-500">
-            <div class="w-32 h-32 bg-brand-blue/10 text-brand-blue rounded-[3rem] flex items-center justify-center mx-auto mb-10 text-6xl shadow-inner">✨</div>
-            <h1 class="text-5xl font-black mb-6">Success!</h1>
-            <p class="text-xl text-slate-500 font-medium mb-12">Reference ID: <span class="text-brand-pink font-black uppercase tracking-widest">EIBIL-${Math.floor(10000 + Math.random() * 90000)}</span></p>
-            <a href="#home" class="btn-brand px-12 py-5 rounded-3xl font-black text-xl shadow-2xl">Return to Dashboard</a>
-        </div>
-    `;
+    if (root) {
+        root.innerHTML = `
+            <div class="py-40 text-center px-4 animate-in zoom-in duration-500">
+                <div class="w-32 h-32 bg-brand-blue/10 text-brand-blue rounded-[3rem] flex items-center justify-center mx-auto mb-10 text-6xl shadow-inner">✨</div>
+                <h1 class="text-5xl font-black mb-6">Success!</h1>
+                <p class="text-xl text-slate-500 font-medium mb-12">Reference ID: <span class="text-brand-pink font-black uppercase tracking-widest">EIBIL-${Math.floor(10000 + Math.random() * 90000)}</span></p>
+                <a href="#home" class="btn-brand px-12 py-5 rounded-3xl font-black text-xl shadow-2xl">Return to Dashboard</a>
+            </div>
+        `;
+    }
 };
 
-window['handleAdminLogin'] = (e) => {
+(window as any)['handleAdminLogin'] = (e: any) => {
     e.preventDefault();
     if (e.target.pass.value === 'admin123') {
         state.isAdmin = true;
@@ -416,14 +463,14 @@ window['handleAdminLogin'] = (e) => {
     }
 };
 
-window['handleAdminLogout'] = () => {
+(window as any)['handleAdminLogout'] = () => {
     state.isAdmin = false;
     localStorage.setItem('eibil_admin_active', 'false');
     window.location.hash = '#home';
     render();
 };
 
-window['handleSaveSettings'] = (e) => {
+(window as any)['handleSaveSettings'] = (e: any) => {
     e.preventDefault();
     state.settings.companyName = e.target.name.value;
     state.settings.tagline = e.target.tagline.value;
